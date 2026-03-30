@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   // Initialize Socket.IO connection for real-time BPM updates
   useEffect(() => {
-    socketRef.current = io('http://localhost:3000', {
+    socketRef.current = io('https://embedded-xposure.onrender.com', {
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionAttempts: 5,
@@ -49,7 +49,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchBPM = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/latest')
+        const response = await axios.get('https://embedded-xposure.onrender.com/api/latest')
         setCurrentBPM(response.data.bpm)
       } catch (error) {
         console.log('Unable to fetch BPM (backend not running yet)')
@@ -113,7 +113,7 @@ export default function Dashboard() {
 
   const handleSendToVR = async () => {
     try {
-      await axios.post('http://localhost:3000/api/session', {
+      await axios.post('https://embedded-xposure.onrender.com/api/session', {
         speech_script: script,
         crowd_count: crowdDensity,
         volume_level: ambientNoise,
